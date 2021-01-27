@@ -16,41 +16,39 @@ public class inputnama : MonoBehaviour
     private void Start()
     {
         score = PlayerPrefs.GetString("Score");
-        Debug.Log(score);
     }
 
     public void Onsubmit()
-        {
-            StartCoroutine(Login());
-        }
+    {
+        print(username + " " + nomorhp);
+        //StartCoroutine(Login());
+    }
 
-            IEnumerator Login()
-            {
-            
-                form = new WWWForm();
-                form.AddField("game_name", "bigball");
-                form.AddField("area_id", "1");
-                form.AddField("username", username.text);
-                form.AddField("nomorhp", nomorhp.text);
-                form.AddField("score", score);
-                form.AddField("time", "15:30:00");
-                form.AddField("code_id", "1");
+    IEnumerator Login()
+    {       
+        form = new WWWForm();
+        form.AddField("game_name", "bigball");
+        form.AddField("area_id", "1");
+        form.AddField("username", username.text);
+        form.AddField("nomorhp", nomorhp.text);
+        form.AddField("score", score);
+        form.AddField("time", "15:30:00");
+        form.AddField("code_id", "1");
 
 
         // Upload to a cgi script
-        using (var w = UnityWebRequest.Post(url, form))
+        using (var w = UnityWebRequest.Post("http://192.168.17.99:3000/player/post-player-score", form))
+        {
+            yield return w.SendWebRequest();
+            if (w.isNetworkError || w.isHttpError)
             {
-                yield return w.SendWebRequest();
-                if (w.isNetworkError || w.isHttpError)
-                {
-                    print(w.error);
-                }
-                else
-                {
-                    print("Finished Uploading");
-                }
+                print(w.error);
             }
-
+            else
+            {
+                print("Finished Uploading Score");
+            }
         }
     }
+}
 
