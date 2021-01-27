@@ -20,8 +20,7 @@ public class inputnama : MonoBehaviour
 
     public void Onsubmit()
     {
-        print(username + " " + nomorhp);
-        //StartCoroutine(Login());
+        StartCoroutine(Login());
     }
 
     IEnumerator Login()
@@ -29,8 +28,8 @@ public class inputnama : MonoBehaviour
         form = new WWWForm();
         form.AddField("game_name", "bigball");
         form.AddField("area_id", "1");
-        form.AddField("username", username.text);
-        form.AddField("nomorhp", nomorhp.text);
+        form.AddField("player_name", username.text);
+        form.AddField("no_telp", nomorhp.text);
         form.AddField("score", score);
         form.AddField("time", "15:30:00");
         form.AddField("code_id", "1");

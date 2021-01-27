@@ -1620,7 +1620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   username: {fileID: 2063315288}
   nomorhp: {fileID: 360739905}
-  url: 
+  url: http://192.168.17.99:3000/player/post-player-score
 --- !u!4 &797995026
 Transform:
   m_ObjectHideFlags: 0
